@@ -1,26 +1,25 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-/*
-Tested working with PHP5.4 and above (including PHP 7 )
+// Get data from form
+$name = $_POST['name'];
+$email= $_POST['email'];
+$message= $_POST['message'];
 
- */
-require_once './vendor/autoload.php';
+$to = "senaukri@gmail.com";
+$subject = "Someon has contacted you from Github Pages";
 
-use FormGuide\Handlx\FormHandler;
+// The following text will be sent
+// Name = user entered name
+// Email = user entered email
+// Message = user entered message
+$txt ="Name = ". $name . "\r\n Email = "
+	. $email . "\r\n Message =" . $message;
 
+$headers = "From: noreply@probweb.com" . "\r\n" .
+			"CC: somebodyelse@example.com";
+if($email != NULL) {
+	mail($to, $subject, $txt, $headers);
+}
 
-$pp = new FormHandler();
-
-$validator = $pp->getValidator();
-$validator->fields(['Name','Email'])->areRequired()->maxLength(50);
-$validator->field('Email')->isEmail();
-$validator->field('Message')->maxLength(6000);
-
-
-
-
-$pp->sendEmailTo('senaukri@gmail.com'); // ← Your email here
-
-echo $pp->process($_POST);
+// Redirect to
+header("Location:last.html");
+?>
