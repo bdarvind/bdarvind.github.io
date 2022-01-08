@@ -14,7 +14,7 @@ $subject = "Someon has contacted you from Github Pages";
 $txt ="Name = ". $name . "\r\n Email = "
 	. $email . "\r\n Message =" . $message;
 
-$headers = "From: noreply@probweb.com" . "\r\n" .
+$headers = "From: contact@probweb.com" . "\r\n" .
 			"CC: somebodyelse@example.com";
 if($email != NULL) {
 	mail($to, $subject, $txt, $headers);
